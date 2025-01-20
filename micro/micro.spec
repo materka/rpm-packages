@@ -7,7 +7,7 @@ Summary:        Modern and intuitive terminal-based text editor
 
 License:        MIT
 URL:            https://github.com/zyedidia/micro
-Source0:        %{url}/archive/%{version}.tar.gz
+Source:        %{url}/archive/v%{version}.tar.gz
 
 Requires:       hicolor-icon-theme
 BuildRequires:  golang make
