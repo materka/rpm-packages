@@ -10,7 +10,7 @@ URL:            https://github.com/zyedidia/micro
 Source:        %{url}/archive/v%{version}.tar.gz
 
 Requires:       hicolor-icon-theme
-BuildRequires:  golang make
+BuildRequires:  git golang make
 
 %description
 micro is a terminal-based text editor that aims to be easy to use and intuitive,
