@@ -17,6 +17,7 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
 BuildRequires:  zlib-devel
+BuildRequires:  git
 
 %global _description %{expand:
 The minimal, blazing-fast, and infinitely customizable prompt for any shell!}
