@@ -13,6 +13,10 @@ URL:            https://github.com/starship/starship
 Source:         %{url}/archive/refs/tags/v%{version}.tar.gz
 
 BuildRequires:  cargo-rpm-macros >= 26
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
+BuildRequires:  cmake
+BuildRequires:  zlib-devel
 
 %global _description %{expand:
 The minimal, blazing-fast, and infinitely customizable prompt for any shell!}
