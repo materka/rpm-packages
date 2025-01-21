@@ -46,7 +46,7 @@ cargo vendor
 %license LICENSE
 %license LICENSE.dependencies
 %license cargo-vendor.txt
-%doc docs/README.md docs/v3.md
+%doc docs/README.md
 %{_bindir}/starship
 
 %changelog
