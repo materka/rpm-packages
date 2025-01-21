@@ -19,7 +19,7 @@ The minimal, blazing-fast, and infinitely customizable prompt for any shell!}
 
 %description %{_description}
 %prep
-%autosetup -n %{crate} -p1
+%autosetup -n %{crate}-%{version} -p1
 cargo vendor
 %cargo_prep -v vendor
 
