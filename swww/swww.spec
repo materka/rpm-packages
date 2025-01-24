@@ -14,6 +14,7 @@ Source:         %{url}/archive/v%{version}.tar.gz
 
 BuildRequires:  cargo-rpm-macros >= 26
 BuildRequires:  scdoc
+BuildRequires: 	git
 
 %global _description %{expand:
 Efficient animated wallpaper daemon for wayland, controlled at runtime.}
@@ -54,7 +55,7 @@ Requires:       %{name} = %{version}-%{release}
 This package installs Zsh completion files for %{name}
 
 %prep
-%autosetup -n %{crate} -p1
+%autosetup -n %{crate}-%{version} -p1
 cargo vendor
 %cargo_prep -v vendor
 
