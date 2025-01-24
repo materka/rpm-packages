@@ -1,4 +1,4 @@
-bcond_without check
+%bcond_without check
 
 %global crate swww
 %global cargo_install_lib 0
