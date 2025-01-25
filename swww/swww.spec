@@ -2,6 +2,7 @@
 
 %global crate swww
 %global cargo_install_lib 0
+%global debug_package %{nil}
 
 Name:           swww
 Version:        0.9.5.3e2e2ba
@@ -59,6 +60,8 @@ This package installs Zsh completion files for %{name}
 cargo vendor
 %cargo_prep -v vendor
 
+%_buildshell doc/gen.sh
+
 %build
 %cargo_build
 %{cargo_license_summary}
@@ -66,15 +69,17 @@ cargo vendor
 %{cargo_vendor_manifest}
 
 %install
-cargo install --path client
-cargo install --path daemon
+cargo install --no-track --path client
+cargo install --no-track --path daemon
 
-%_buildshell doc/gen.sh
-
-for src in doc/generated/*; do
-    out=$(basename "$src")    
-    install -Dpm644 doc/generated/${out} %{buildroot}%{_mandir}/man1/${out}
-done
+install -Dpm644 doc/generated/swww.1 %{buildroot}%{_mandir}/man1/swww.1
+install -Dpm644 doc/generated/swww-clear.1 %{buildroot}%{_mandir}/man1/swww-clear.1
+install -Dpm644 doc/generated/swww-clear-cache.1 %{buildroot}%{_mandir}/man1/swww-clear-cache.1
+install -Dpm644 doc/generated/swww-daemon.1 %{buildroot}%{_mandir}/man1/swww-daemon.1
+install -Dpm644 doc/generated/swww-img.1 %{buildroot}%{_mandir}/man1/swww-img.1
+install -Dpm644 doc/generated/swww-kill.1 %{buildroot}%{_mandir}/man1/swww-kill.1
+install -Dpm644 doc/generated/swww-query.1 %{buildroot}%{_mandir}/man1/swww-query.1
+install -Dpm644 doc/generated/swww-restore.1 %{buildroot}%{_mandir}/man1/swww-restore.1
 
 install -Dpm644 completions/swww.bash %{buildroot}%{bash_completions_dir}/swww
 install -Dpm644 completions/swww.fish %{buildroot}%{fish_completions_dir}/swww.fish
@@ -89,10 +94,17 @@ install -Dpm644 completions/_swww %{buildroot}%{zsh_completions_dir}/_swww
 %license LICENSE
 %license LICENSE.dependencies
 %license cargo-vendor.txt
-%doc docs/README.md README.md
+%doc README.md
 %{_bindir}/swww
 %{_bindir}/swww-daemon
-%{_mandir}/man1/*.1*
+%{_mandir}/man1/swww.1*
+%{_mandir}/man1/swww-clear.1*
+%{_mandir}/man1/swww-clear-cache.1*
+%{_mandir}/man1/swww-daemon.1*
+%{_mandir}/man1/swww-img.1*
+%{_mandir}/man1/swww-kill.1*
+%{_mandir}/man1/swww-query.1*
+%{_mandir}/man1/swww-restore.1*
 
 %files bash-completion
 %{bash_completions_dir}/swww
