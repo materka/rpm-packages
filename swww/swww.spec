@@ -4,17 +4,17 @@
 %global cargo_install_lib 0
 
 Name:           swww
-Version:        0.9.5
+Version:        0.9.5.3e2e2ba
 Release:        1%{?dist}
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 License:        GPL-3
 
-URL:            https://github.com/LGFae/swww
+URL:            https://github.com/materka/swww
 Source:         %{url}/archive/v%{version}.tar.gz
-
 BuildRequires:  cargo-rpm-macros >= 26
 BuildRequires:  scdoc
 BuildRequires: 	git
+BuildRequires:	lz4-devel
 
 %global _description %{expand:
 Efficient animated wallpaper daemon for wayland, controlled at runtime.}
@@ -66,11 +66,14 @@ cargo vendor
 %{cargo_vendor_manifest}
 
 %install
-%cargo_install
-for src in doc/*.scd; do
-    out=$(basename "$src" .scd)
-    scdoc < "$src" > man/${out}.1
-    install -Dpm644 man/${out}.1 %{buildroot}%{_mandir}/man1/${out}.1
+cargo install --path client
+cargo install --path daemon
+
+%_buildshell doc/gen.sh
+
+for src in doc/generated/*; do
+    out=$(basename "$src")    
+    install -Dpm644 doc/generated/${out} %{buildroot}%{_mandir}/man1/${out}
 done
 
 install -Dpm644 completions/swww.bash %{buildroot}%{bash_completions_dir}/swww
@@ -88,6 +91,7 @@ install -Dpm644 completions/_swww %{buildroot}%{zsh_completions_dir}/_swww
 %license cargo-vendor.txt
 %doc docs/README.md README.md
 %{_bindir}/swww
+%{_bindir}/swww-daemon
 %{_mandir}/man1/*.1*
 
 %files bash-completion
